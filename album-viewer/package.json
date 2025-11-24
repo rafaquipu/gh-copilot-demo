@@ -10,13 +10,19 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@types/d3": "^7.4.3",
     "axios": "^1.6.0",
+    "d3": "^7.9.0",
     "vue": "^3.4.0"
   },
   "devDependencies": {
+    "@types/chai": "^5.2.3",
+    "@types/mocha": "^10.0.10",
     "@types/node": "^24.3.0",
     "@vitejs/plugin-vue": "^5.0.0",
     "@vue/tsconfig": "^0.8.1",
+    "chai": "^6.2.1",
+    "mocha": "^11.7.5",
     "typescript": "^5.9.2",
     "vite": "^5.0.0",
     "vue-tsc": "^3.0.6"
