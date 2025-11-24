@@ -41,7 +41,7 @@ namespace albums_api.Controllers
             return sortBy.ToLowerInvariant() switch
             {
                 "name" or "title" => albums.OrderBy(a => a.Title).ToList(),
-                "artist" => albums.OrderBy(a => a.Artist).ToList(),
+                "artist" => albums.OrderBy(a => a.Artist.Name).ToList(),
                 "price" => albums.OrderBy(a => a.Price).ToList(),
                 _ => albums // Return unsorted if invalid sort field
             };
@@ -73,9 +73,9 @@ namespace albums_api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Album album)
         {
-            if (string.IsNullOrEmpty(album.Title) || string.IsNullOrEmpty(album.Artist))
+            if (string.IsNullOrEmpty(album.Title) || album.Artist == null || string.IsNullOrEmpty(album.Artist.Name))
             {
-                return BadRequest("Title and Artist are required");
+                return BadRequest("Title and Artist Name are required");
             }
 
             var createdAlbum = Album.Create(album);
@@ -92,9 +92,9 @@ namespace albums_api.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Album album)
         {
-            if (string.IsNullOrEmpty(album.Title) || string.IsNullOrEmpty(album.Artist))
+            if (string.IsNullOrEmpty(album.Title) || album.Artist == null || string.IsNullOrEmpty(album.Artist.Name))
             {
-                return BadRequest("Title and Artist are required");
+                return BadRequest("Title and Artist Name are required");
             }
 
             var success = Album.Update(id, album);
